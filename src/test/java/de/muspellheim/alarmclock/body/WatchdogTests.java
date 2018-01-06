@@ -69,10 +69,17 @@ public class WatchdogTests {
 
     @Test
     public void checkWakeupTimeAtNextDay() {
+        watchdog.start(LocalDateTime.of(2018, 1, 7, 8, 0));
+        watchdog.check(LocalDateTime.of(2018, 1, 6, 18, 50, 15));
+        assertEquals(Duration.ofSeconds(13 * 60 * 60 + 9 * 60 + 45), remainingTime);
     }
 
     @Test
     public void checkWakeupTimeEarlierThisDay() {
+        watchdog.start(LocalDateTime.of(2018, 1, 6, 8, 0));
+        watchdog.check(LocalDateTime.of(2018, 1, 6, 18, 50, 15));
+        assertNull("Wakeup time reached", remainingTime);
+        assertTrue("Wakeup time reached", wakeupTimeReached);
     }
 
 }
