@@ -1,0 +1,6 @@
+/*
+ * Copyright (c) 2018 Falko Schumann
+ * Licensed under the terms of the MIT License.
+ */
+
+rootProject.name = 'alarm-clock'

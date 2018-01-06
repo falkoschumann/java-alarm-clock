@@ -1,0 +1,20 @@
+/*
+ * Copyright (c) 2018 Falko Schumann
+ * Licensed under the terms of the MIT License.
+ */
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'de.muspellheim.alarmclock.head.Program'
+sourceCompatibility = 1.8
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+}
