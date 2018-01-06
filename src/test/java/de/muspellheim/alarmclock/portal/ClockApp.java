@@ -3,17 +3,17 @@
  * Licensed under the terms of the MIT License.
  */
 
-package de.muspellheim.alarmclock.provider;
+package de.muspellheim.alarmclock.portal;
 
 import java.util.concurrent.*;
 
-public class JavaFXAlarmBellApp {
+public class ClockApp {
 
     public static void main(String[] args) throws Exception {
-        JavaFXAlarmBell bell = new JavaFXAlarmBell();
-        bell.ring();
+        Clock clock = new Clock();
+        clock.onCurrentTime.addObserver(System.out::println);
 
-        TimeUnit.SECONDS.sleep(3);
+        TimeUnit.SECONDS.sleep(10);
     }
 
 }
