@@ -63,3 +63,8 @@ _alarm bell_ is rung.
 
 Starting the alarm clock means registering the _wakeup time_ and setting the
 _status_ to "active". Stopping it means setting the _status_ to "inactive."
+
+
+### Class Design
+
+![Calss Design](images/class-design.png)
