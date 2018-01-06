@@ -31,6 +31,20 @@ public class WatchdogTests {
 
     @Test
     public void checkOnlyIfActive() {
+        Watchdog watchdog = new Watchdog();
+        watchdog.onRemainingTime.addObserver(this::setRemainingTime);
+
+        watchdog.check(LocalDateTime.now());
+        assertNull("Not started", remainingTime);
+
+        watchdog.start(LocalDateTime.now());
+        watchdog.check(LocalDateTime.now());
+        assertNotNull("Started", remainingTime);
+        remainingTime = null;
+
+        watchdog.stop();
+        watchdog.check(LocalDateTime.now());
+        assertNull("Stopped", remainingTime);
     }
 
     @Test

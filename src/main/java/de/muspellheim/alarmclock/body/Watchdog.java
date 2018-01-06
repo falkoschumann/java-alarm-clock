@@ -27,6 +27,9 @@ public class Watchdog {
     }
 
     public void check(LocalDateTime currentTime) {
+        if (wakeupTime == null || !active)
+            return;
+
         Duration remainingTime = Duration.between(currentTime, wakeupTime);
         onRemainingTime.send(remainingTime);
     }
