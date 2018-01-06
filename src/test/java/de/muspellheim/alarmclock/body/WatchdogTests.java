@@ -13,17 +13,21 @@ import static org.junit.Assert.*;
 
 public class WatchdogTests {
 
+    private Watchdog watchdog;
+
     private Duration remainingTime;
 
-    private void setRemainingTime(Duration value) {
-        remainingTime = value;
+    private boolean wakeupTimeReached;
+
+    @Before
+    public void setUp() {
+        watchdog = new Watchdog();
+        watchdog.onRemainingTime.addObserver(t -> remainingTime = t);
+        watchdog.onWakeupTimeReached.addObserver(() -> wakeupTimeReached = true);
     }
 
     @Test
     public void calculateRemainingTime() {
-        Watchdog watchdog = new Watchdog();
-        watchdog.onRemainingTime.addObserver(this::setRemainingTime);
-
         watchdog.start(LocalDateTime.of(2018, 1, 6, 18, 30));
         watchdog.check(LocalDateTime.of(2018, 1, 6, 18, 13, 27));
         assertEquals(Duration.ofSeconds(16 * 60 + 33), remainingTime);
@@ -31,17 +35,14 @@ public class WatchdogTests {
 
     @Test
     public void checkOnlyIfActive() {
-        Watchdog watchdog = new Watchdog();
-        watchdog.onRemainingTime.addObserver(this::setRemainingTime);
-
         watchdog.check(LocalDateTime.now());
         assertNull("Not started", remainingTime);
 
         watchdog.start(LocalDateTime.now());
         watchdog.check(LocalDateTime.now());
         assertNotNull("Started", remainingTime);
-        remainingTime = null;
 
+        remainingTime = null;
         watchdog.stop();
         watchdog.check(LocalDateTime.now());
         assertNull("Stopped", remainingTime);
@@ -49,6 +50,21 @@ public class WatchdogTests {
 
     @Test
     public void checkIfWakeupTimeIsReached() {
+        watchdog.start(LocalDateTime.of(2018, 1, 6, 18, 30));
+
+        watchdog.check(LocalDateTime.of(2018, 1, 6, 18, 13, 27));
+        assertEquals(Duration.ofSeconds(16 * 60 + 33), remainingTime);
+        assertFalse("Wakeup time not reached", wakeupTimeReached);
+
+        watchdog.check(LocalDateTime.of(2018, 1, 6, 18, 30, 0));
+        assertEquals(Duration.ofSeconds(0), remainingTime);
+        assertTrue("Wakeup time reached", wakeupTimeReached);
+
+        remainingTime = null;
+        wakeupTimeReached = false;
+        watchdog.check(LocalDateTime.of(2018, 1, 6, 19, 0, 0));
+        assertNull("Stopped", remainingTime);
+        assertFalse("Stopped", wakeupTimeReached);
     }
 
     @Test

@@ -31,7 +31,12 @@ public class Watchdog {
             return;
 
         Duration remainingTime = Duration.between(currentTime, wakeupTime);
-        onRemainingTime.send(remainingTime);
+        if (remainingTime.getSeconds() >= 0)
+            onRemainingTime.send(remainingTime);
+        if (remainingTime.getSeconds() <= 0) {
+            active = false;
+            onWakeupTimeReached.trigger();
+        }
     }
 
 }
