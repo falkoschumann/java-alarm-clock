@@ -23,3 +23,20 @@ disappear.
 
 When the wakeup time is reached a WAV or MP3 file should be played by the
 application.
+
+
+Overview
+--------
+
+![Overview: Alarm Clock](images/overview.png)
+
+*   System clock
+    *   Update display of current time
+    *   Update display of remaining time while alarm is switched on
+    *   Check if wakeup time has been reached
+    *   Sound alarm if wakeup time has been reached
+    *   Switched off checking for wakeup time if wakeup time has been reached
+*   Switch on the alarm
+    *   Switch on checking for the wakeup time
+*   Switch off the alarm
+    *   Switch off checking for the wakeup time
