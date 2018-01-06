@@ -14,10 +14,10 @@ public class Watchdog {
     public final Event<Duration> onRemainingTime = new Event<>();
     public final Action onWakeupTimeReached = new Action();
 
-    private LocalDateTime wakeupTime;
+    private LocalTime wakeupTime;
     private boolean active;
 
-    public void start(LocalDateTime wakeupTime) {
+    public void start(LocalTime wakeupTime) {
         this.wakeupTime = wakeupTime;
         active = true;
     }
@@ -30,7 +30,12 @@ public class Watchdog {
         if (wakeupTime == null || !active)
             return;
 
-        Duration remainingTime = Duration.between(currentTime, wakeupTime);
+        LocalDate wakeupDate = currentTime.toLocalDate();
+        if (currentTime.getHour() > wakeupTime.getHour())
+            wakeupDate = wakeupDate.plusDays(1);
+        LocalDateTime wakeupDateTime = LocalDateTime.of(wakeupDate, wakeupTime);
+
+        Duration remainingTime = Duration.between(currentTime, wakeupDateTime);
         if (remainingTime.getSeconds() >= 0)
             onRemainingTime.send(remainingTime);
         if (remainingTime.getSeconds() <= 0) {

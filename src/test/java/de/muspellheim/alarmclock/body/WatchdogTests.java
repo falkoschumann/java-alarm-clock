@@ -28,7 +28,7 @@ public class WatchdogTests {
 
     @Test
     public void calculateRemainingTime() {
-        watchdog.start(LocalDateTime.of(2018, 1, 6, 18, 30));
+        watchdog.start(LocalTime.of(18, 30));
         watchdog.check(LocalDateTime.of(2018, 1, 6, 18, 13, 27));
         assertEquals(Duration.ofSeconds(16 * 60 + 33), remainingTime);
     }
@@ -38,7 +38,7 @@ public class WatchdogTests {
         watchdog.check(LocalDateTime.now());
         assertNull("Not started", remainingTime);
 
-        watchdog.start(LocalDateTime.now());
+        watchdog.start(LocalTime.now());
         watchdog.check(LocalDateTime.now());
         assertNotNull("Started", remainingTime);
 
@@ -50,7 +50,7 @@ public class WatchdogTests {
 
     @Test
     public void checkIfWakeupTimeIsReached() {
-        watchdog.start(LocalDateTime.of(2018, 1, 6, 18, 30));
+        watchdog.start(LocalTime.of(18, 30));
 
         watchdog.check(LocalDateTime.of(2018, 1, 6, 18, 13, 27));
         assertEquals(Duration.ofSeconds(16 * 60 + 33), remainingTime);
@@ -69,17 +69,9 @@ public class WatchdogTests {
 
     @Test
     public void checkWakeupTimeAtNextDay() {
-        watchdog.start(LocalDateTime.of(2018, 1, 7, 8, 0));
+        watchdog.start(LocalTime.of(8, 0));
         watchdog.check(LocalDateTime.of(2018, 1, 6, 18, 50, 15));
         assertEquals(Duration.ofSeconds(13 * 60 * 60 + 9 * 60 + 45), remainingTime);
-    }
-
-    @Test
-    public void checkWakeupTimeEarlierThisDay() {
-        watchdog.start(LocalDateTime.of(2018, 1, 6, 8, 0));
-        watchdog.check(LocalDateTime.of(2018, 1, 6, 18, 50, 15));
-        assertNull("Wakeup time reached", remainingTime);
-        assertTrue("Wakeup time reached", wakeupTimeReached);
     }
 
 }
