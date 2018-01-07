@@ -9,12 +9,14 @@ import javafx.fxml.*;
 
 import java.io.*;
 import java.net.*;
+import java.util.*;
 
 public class AlarmClockFactory {
 
     public AlarmClockController create() {
         URL url = getClass().getResource("/de/muspellheim/alarmclock/portal/AlarmClock.fxml");
-        FXMLLoader loader = new FXMLLoader(url);
+        ResourceBundle resources = ResourceBundle.getBundle("de.muspellheim.alarmclock.portal.AlarmClock");
+        FXMLLoader loader = new FXMLLoader(url, resources);
         try {
             loader.load();
             return loader.getController();
