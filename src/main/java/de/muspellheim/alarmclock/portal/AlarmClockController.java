@@ -61,19 +61,26 @@ public class AlarmClockController {
         Platform.runLater(() -> currentTime.setText(time.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM))));
     }
 
-    public void remainingTime(LocalTime time) {
+    public void updateRemainingTime(Duration duration) {
+        LocalTime time = LocalTime.ofSecondOfDay(duration.getSeconds());
         Platform.runLater(() -> remainingTime.setText(time.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM))));
     }
 
     public void start() {
-        onOff.setStyle("-fx-base: '#ff4141'");
         remainingTime.setVisible(true);
+        wakeupTime.setDisable(true);
+        onOff.setSelected(true);
+        onOff.setStyle("-fx-base: '#ff4141'");
+
         onStart.send(LocalTime.parse(wakeupTime.getText()));
     }
 
     public void stop() {
-        onOff.setStyle(null);
         remainingTime.setVisible(false);
+        wakeupTime.setDisable(false);
+        onOff.setSelected(false);
+        onOff.setStyle(null);
+
         onStop.trigger();
     }
 

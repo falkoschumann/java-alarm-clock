@@ -5,17 +5,37 @@
 
 package de.muspellheim.alarmclock.head;
 
+import de.muspellheim.alarmclock.body.*;
+import de.muspellheim.alarmclock.portal.*;
+import de.muspellheim.alarmclock.provider.*;
 import javafx.application.*;
 import javafx.scene.*;
-import javafx.scene.control.*;
 import javafx.stage.*;
 
 public class Program extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        Label label = new Label("Hello World!");
-        Scene scene = new Scene(label, 400, 250);
+    public void start(Stage primaryStage) {
+        Watchdog watchdog = new Watchdog();
+        Clock clock = new Clock();
+        AlarmClockController alarmClock = new AlarmClockFactory().create();
+        AlarmBell bell = new JavaFXAlarmBell();
+
+        alarmClock.onStart.addObserver(t -> watchdog.start(t));
+        alarmClock.onStop.addObserver(() -> watchdog.stop());
+
+        clock.onCurrentTime.addObserver(t -> {
+            watchdog.check(t);
+            alarmClock.updateCurrentTime(t);
+        });
+
+        watchdog.onRemainingTime.addObserver(t -> alarmClock.updateRemainingTime(t));
+        watchdog.onWakeupTimeReached.addObserver(() -> {
+            alarmClock.stop();
+            bell.ring();
+        });
+
+        Scene scene = new Scene(alarmClock.getView());
         primaryStage.setScene(scene);
         primaryStage.show();
     }
