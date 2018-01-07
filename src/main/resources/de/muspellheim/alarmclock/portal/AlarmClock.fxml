@@ -9,8 +9,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<VBox fx:id="view" alignment="CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/8.0.121"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.muspellheim.alarmclock.portal.AlarmClockController">
+<VBox fx:id="view" alignment="CENTER" spacing="15.0"
+      xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="de.muspellheim.alarmclock.portal.AlarmClockController">
     <children>
         <Label fx:id="currentTime" text="13:34:51">
             <font>
@@ -25,7 +26,7 @@
         <HBox alignment="CENTER" spacing="10.0">
             <children>
                 <Label text="Wakeup time:"/>
-                <TextField fx:id="wakeupTime" prefWidth="80.0" text="15:00"/>
+                <TextField fx:id="wakeupTime" prefWidth="80.0" text="15:00" onKeyReleased="#validateWakeupTime"/>
                 <ToggleButton fx:id="onOff" mnemonicParsing="false" onAction="#toggleOnOff" text="On/Off"/>
             </children>
             <VBox.margin>
