@@ -31,7 +31,8 @@ public class Watchdog {
             return;
 
         LocalDate wakeupDate = currentTime.toLocalDate();
-        if (currentTime.getHour() > wakeupTime.getHour())
+        Duration difference = Duration.between(currentTime.toLocalTime(), wakeupTime);
+        if (difference.isNegative() && Math.abs(difference.getSeconds()) > 60)
             wakeupDate = wakeupDate.plusDays(1);
         LocalDateTime wakeupDateTime = LocalDateTime.of(wakeupDate, wakeupTime);
 
