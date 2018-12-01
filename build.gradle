@@ -22,7 +22,11 @@ test {
 }
 
 javafx {
-    modules = ['javafx.controls', 'javafx.fxml']
+    modules = [
+            'javafx.controls',
+            'javafx.fxml',
+            'javafx.media'
+    ]
 }
 
 mainClassName = 'de.muspellheim.alarmclock.application.AlarmClock'
