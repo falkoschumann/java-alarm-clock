@@ -3,7 +3,7 @@
  * Copyright (c) 2018 Falko Schumann
  */
 
-package de.muspellheim.domain;
+package de.muspellheim.alarmclock.domain;
 
 import org.junit.jupiter.api.*;
 
@@ -23,7 +23,7 @@ public class WatchdogTests {
         sut.startWatchingFor(LocalDateTime.of(2015, 1, 1, 10, 0));
         sut.check(LocalDateTime.of(2015, 1, 1, 9, 55, 35));
 
-        assertEquals(Duration.ofMinutes(1).plusSeconds(25), remainingTime.get(), "remainingTime");
+        assertEquals(Duration.ofMinutes(4).plusSeconds(25), remainingTime.get(), "remainingTime");
     }
 
     @Test

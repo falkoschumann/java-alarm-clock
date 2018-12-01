@@ -3,7 +3,7 @@
  * Copyright (c) 2018 Falko Schumann
  */
 
-package de.muspellheim.domain;
+package de.muspellheim.alarmclock.domain;
 
 import de.muspellheim.util.*;
 
