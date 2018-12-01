@@ -5,12 +5,12 @@
 
 package de.muspellheim.domain;
 
-import org.junit.*;
+import org.junit.jupiter.api.*;
 
 import java.time.*;
 import java.util.concurrent.atomic.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class WatchdogTests {
 
@@ -23,7 +23,7 @@ public class WatchdogTests {
         sut.startWatchingFor(LocalDateTime.of(2015, 1, 1, 10, 0));
         sut.check(LocalDateTime.of(2015, 1, 1, 9, 55, 35));
 
-        assertEquals("remainingTime", Duration.ofMinutes(4).plusSeconds(25), remainingTime.get());
+        assertEquals(Duration.ofMinutes(1).plusSeconds(25), remainingTime.get(), "remainingTime");
     }
 
     @Test
@@ -37,8 +37,8 @@ public class WatchdogTests {
         sut.startWatchingFor(LocalDateTime.of(2015, 1, 1, 10, 0));
         sut.check(LocalDateTime.of(2015, 1, 1, 10, 0, 0));
 
-        assertEquals("remaining time", Duration.ZERO, remainingTime.get());
-        assertTrue("wake up time discovered", wakeUpTimeDiscovered.get());
+        assertEquals(Duration.ZERO, remainingTime.get(), "remaining time");
+        assertTrue(wakeUpTimeDiscovered.get(), "wake up time discovered");
     }
 
     @Test
@@ -52,8 +52,8 @@ public class WatchdogTests {
         sut.startWatchingFor(LocalDateTime.of(2015, 1, 1, 10, 0));
         sut.check(LocalDateTime.of(2015, 1, 1, 10, 1, 0));
 
-        assertEquals("remaining time", Duration.ZERO, remainingTime.get());
-        assertTrue("wake up time discovered", wakeUpTimeDiscovered.get());
+        assertEquals(Duration.ZERO, remainingTime.get(), "remaining time");
+        assertTrue(wakeUpTimeDiscovered.get(), "wake up time discovered");
     }
 
     @Test
@@ -70,8 +70,8 @@ public class WatchdogTests {
         remainingTime.set(null);
         wakeUpTimeDiscovered.set(false);
 
-        assertNull("remaining time", remainingTime.get());
-        assertFalse("wake up time discovered", wakeUpTimeDiscovered.get());
+        assertNull(remainingTime.get(), "remaining time");
+        assertFalse(wakeUpTimeDiscovered.get(), "wake up time discovered");
     }
 
 }
