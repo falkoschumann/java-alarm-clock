@@ -1,3 +1,8 @@
+/*
+ * Alarm Clock
+ * Copyright (c) 2018 Falko Schumann
+ */
+
 plugins {
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.5'
@@ -5,6 +10,10 @@ plugins {
 
 repositories {
     mavenCentral()
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.12'
 }
 
 javafx {
