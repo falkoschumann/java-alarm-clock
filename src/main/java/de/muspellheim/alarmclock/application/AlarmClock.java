@@ -5,13 +5,11 @@
 
 package de.muspellheim.alarmclock.application;
 
+import de.muspellheim.alarmclock.portal.*;
+import de.muspellheim.fxml.*;
 import javafx.application.*;
-import javafx.fxml.*;
 import javafx.scene.*;
-import javafx.scene.layout.*;
 import javafx.stage.*;
-
-import java.net.*;
 
 public class AlarmClock extends Application {
 
@@ -21,12 +19,10 @@ public class AlarmClock extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        URL url = getClass().getResource("/AlarmClockDialog.fxml");
-        Pane pane = FXMLLoader.load(url);
+        AlarmClockDialogController controller = ViewControllerFactory.create(AlarmClockDialogController.class);
 
-        Scene scene = new Scene(pane);
         primaryStage.setTitle("Alarm Clock");
-        primaryStage.setScene(scene);
+        primaryStage.setScene(new Scene(controller.getView()));
         primaryStage.show();
     }
 

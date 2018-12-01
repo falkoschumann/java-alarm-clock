@@ -6,21 +6,25 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
+<!--
+  ~ Alarm Clock
+  ~ Copyright (c) 2018 Falko Schumann
+  -->
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:id="view" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.muspellheim.alarmclock.portal.AlarmClockDialogController">
    <children>
       <Label fx:id="currentTimeLabel" layoutX="123.0" layoutY="92.0" text="06:19:43">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Label fx:id="remainingTimeLabel" layoutX="152.0" layoutY="136.0" text="00:10:17" textFill="RED">
+      <Label fx:id="remainingTimeLabel" layoutX="152.0" layoutY="136.0" text="00:10:17" textFill="RED" visible="false">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
       <Label layoutX="64.0" layoutY="264.0" text="Wake up time:" />
       <TextField fx:id="wakeUpTimeTextField" layoutX="165.0" layoutY="259.0" prefHeight="27.0" prefWidth="70.0" text="6:30" />
-      <ToggleButton fx:id="onOffButton" layoutX="248.0" layoutY="259.0" mnemonicParsing="false" text="On/Off" />
+      <ToggleButton fx:id="onOffButton" layoutX="248.0" layoutY="259.0" mnemonicParsing="false" onAction="#toggleOnOff" text="On/Off" />
    </children>
 </Pane>
