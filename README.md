@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/falkoschumann/java-alarm-clock.svg?branch=master)](https://travis-ci.org/falkoschumann/java-alarm-clock)
+
 # Alarm Clock
 
 An alarm clock as an application. It displays the current time. If the user set a wake up time, it shows remaining time and sounds an alarm if
