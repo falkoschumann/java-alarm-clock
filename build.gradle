@@ -8,6 +8,9 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.5'
 }
 
+sourceCompatibility = 11
+targetCompatibility = 11
+
 repositories {
     mavenCentral()
 }
@@ -29,4 +32,4 @@ javafx {
     ]
 }
 
-mainClassName = 'de.muspellheim.alarmclock.application.AlarmClock'
+mainClassName = 'de.muspellheim.alarmclock/de.muspellheim.alarmclock.application.AlarmClock'
