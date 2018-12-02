@@ -58,6 +58,14 @@ public class AlarmClockDialogController {
         });
     }
 
+    public Event<LocalTime> onStartRequested() {
+        return onStartRequested;
+    }
+
+    public Action onStopRequested() {
+        return onStopRequested;
+    }
+
     @FXML
     private void startStopButtonClicked() {
         if (startStopButton.isSelected()) {
@@ -71,14 +79,6 @@ public class AlarmClockDialogController {
             remainingTimeLabel.setVisible(false);
             onStopRequested.trigger();
         }
-    }
-
-    public Event<LocalTime> onStartRequested() {
-        return onStartRequested;
-    }
-
-    public Action onStopRequested() {
-        return onStopRequested;
     }
 
 }
