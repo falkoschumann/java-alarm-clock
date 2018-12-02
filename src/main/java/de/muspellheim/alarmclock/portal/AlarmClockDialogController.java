@@ -6,6 +6,7 @@
 package de.muspellheim.alarmclock.portal;
 
 import de.muspellheim.util.*;
+import javafx.application.*;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
@@ -40,19 +41,21 @@ public class AlarmClockDialogController {
 
     public void updateCurrentTime(LocalDateTime time) {
         String s = time.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM));
-        currentTimeLabel.setText(s);
+        Platform.runLater(() -> currentTimeLabel.setText(s));
     }
 
     public void updateRemainingTime(Duration time) {
         LocalTime t = LocalTime.of(time.toHoursPart(), time.toMinutesPart(), time.toSecondsPart());
         DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM);
         String s = t.format(formatter);
-        currentTimeLabel.setText(s);
+        Platform.runLater(() -> remainingTimeLabel.setText(s));
     }
 
     public void wakeUpTimeReached() {
-        remainingTimeLabel.setVisible(false);
-        startStopButton.setSelected(false);
+        Platform.runLater(() -> {
+            remainingTimeLabel.setVisible(false);
+            startStopButton.setSelected(false);
+        });
     }
 
     @FXML
