@@ -1,0 +1,24 @@
+/*
+ * Alarm Clock
+ * Copyright (c) 2018 Falko Schumann
+ */
+
+apply plugin: 'application'
+apply plugin: 'org.openjfx.javafxplugin'
+
+mainClassName = 'de.muspellheim.alarmclock.application/de.muspellheim.alarmclock.application.AlarmClock'
+
+javafx {
+    modules = [
+            'javafx.controls',
+            'javafx.fxml'
+    ]
+}
+
+dependencies {
+    implementation project(':base')
+    implementation project(':domain')
+    implementation project(':portals')
+    implementation project(':providers-api')
+    implementation project(':providers') // runtimeOnly, if api exists
+}

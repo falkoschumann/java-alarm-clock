@@ -1,0 +1,11 @@
+/*
+ * Alarm Clock
+ * Copyright (c) 2018 Falko Schumann
+ */
+
+apply plugin: 'java-library'
+apply plugin: 'org.openjfx.javafxplugin'
+
+javafx {
+    modules = ['javafx.fxml']
+}

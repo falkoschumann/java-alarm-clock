@@ -1,0 +1,10 @@
+/*
+ * Alarm Clock
+ * Copyright (c) 2018 Falko Schumann
+ */
+
+apply plugin: 'java-library'
+
+dependencies {
+    implementation project(':base')
+}

@@ -24,7 +24,7 @@ TODO
 
 There are two actors and and one resource. The actors are the user and the system clock. The resource is the alarm bell.   
 
-### Domain
+### Domain Design
 
 #### Dialog Alarm Clock
 
@@ -44,7 +44,7 @@ There are two actors and and one resource. The actors are the user and the syste
 
 *   Switch off checking for the wake up time.
 
-### Flow
+### Flow Design
 
 ![Flow Design](doc/flow-design.png)
 
@@ -55,3 +55,12 @@ __Legend:__
 *   Triangle - Provider
 *   Blue: UI Thread
 *   Red: Clock Thread
+
+### Module Design
+
+![Module Design](doc/module-design.png)
+
+__Legend:__
+
+*   Solid Line: Compile Dependency
+*   Dashed Line: Runtime Dependency

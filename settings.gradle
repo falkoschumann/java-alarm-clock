@@ -4,3 +4,9 @@
  */
 
 rootProject.name = 'alarm-clock'
+include 'application'
+include 'base'
+include 'domain'
+include 'portals'
+include 'providers-api'
+include 'providers'
