@@ -22,3 +22,9 @@ dependencies {
     implementation project(':providers-api')
     runtimeOnly project(':providers')
 }
+
+distributions {
+    main {
+        baseName 'alarm-clock'
+    }
+}
