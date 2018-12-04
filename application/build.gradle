@@ -26,5 +26,12 @@ dependencies {
 distributions {
     main {
         baseName 'alarm-clock'
+        contents {
+            from(rootDir) {
+                include 'README.md'
+                include 'LICENSE.txt'
+                rename 'README.md', 'README.txt'
+            }
+        }
     }
 }
