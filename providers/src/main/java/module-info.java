@@ -1,5 +1,6 @@
 module de.muspellheim.alarmclock.providers {
     requires javafx.media;
+    requires de.muspellheim.alarmclock.providers.api;
 
-    exports de.muspellheim.alarmclock.provider;
+    provides de.muspellheim.alarmclock.provider.AlarmBell with de.muspellheim.alarmclock.provider.impl.AlarmBellImpl;
 }

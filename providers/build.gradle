@@ -9,3 +9,7 @@ apply plugin: 'org.openjfx.javafxplugin'
 javafx {
     modules = ['javafx.media']
 }
+
+dependencies {
+    implementation project(':providers-api')
+}

@@ -15,6 +15,7 @@ import javafx.scene.*;
 import javafx.stage.*;
 
 import java.time.*;
+import java.util.*;
 
 public class AlarmClock extends Application {
 
@@ -27,7 +28,7 @@ public class AlarmClock extends Application {
         Watchdog watchdog = new Watchdog();
         Clock clock = new Clock();
         AlarmClockDialogController ui = ViewControllerFactory.create(AlarmClockDialogController.class);
-        AlarmBell alarmBell = new AlarmBell();
+        AlarmBell alarmBell = ServiceLoader.load(AlarmBell.class).findFirst().get();
 
         clock.onCurrentTime().addHandler(t -> {
             ui.updateCurrentTime(t);
