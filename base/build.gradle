@@ -7,5 +7,5 @@ apply plugin: 'java-library'
 apply plugin: 'org.openjfx.javafxplugin'
 
 javafx {
-    modules = ['javafx.fxml']
+    modules = ['javafx.controls', 'javafx.fxml']
 }

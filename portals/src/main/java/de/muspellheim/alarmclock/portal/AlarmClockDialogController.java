@@ -5,23 +5,19 @@
 
 package de.muspellheim.alarmclock.portal;
 
+import de.muspellheim.fxml.*;
 import de.muspellheim.util.*;
 import javafx.application.*;
 import javafx.fxml.*;
-import javafx.scene.*;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
 
 import java.time.*;
 import java.time.format.*;
 
-public class AlarmClockDialogController {
+public class AlarmClockDialogController extends ViewController {
 
     private final Event<LocalTime> onStartRequested = new Event<>();
     private final Action onStopRequested = new Action();
-
-    @FXML
-    private Pane view;
 
     @FXML
     private Label currentTimeLabel;
@@ -35,8 +31,8 @@ public class AlarmClockDialogController {
     @FXML
     private ToggleButton startStopButton;
 
-    public Parent getView() {
-        return view;
+    public static AlarmClockDialogController load() {
+        return load(AlarmClockDialogController.class);
     }
 
     public void updateCurrentTime(LocalDateTime time) {

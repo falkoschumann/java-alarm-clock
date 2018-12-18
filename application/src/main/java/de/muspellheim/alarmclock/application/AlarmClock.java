@@ -9,7 +9,6 @@ import de.muspellheim.alarmclock.domain.*;
 import de.muspellheim.alarmclock.portal.Clock;
 import de.muspellheim.alarmclock.portal.*;
 import de.muspellheim.alarmclock.provider.*;
-import de.muspellheim.fxml.*;
 import javafx.application.*;
 import javafx.scene.*;
 import javafx.stage.*;
@@ -24,10 +23,10 @@ public class AlarmClock extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         Watchdog watchdog = new Watchdog();
         Clock clock = new Clock();
-        AlarmClockDialogController ui = ViewControllerFactory.create(AlarmClockDialogController.class);
+        AlarmClockDialogController ui = AlarmClockDialogController.load();
         AlarmBell alarmBell = ServiceLoader.load(AlarmBell.class).findFirst().get();
 
         clock.onCurrentTime().addHandler(t -> {
