@@ -23,8 +23,8 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="64.0" layoutY="264.0" text="Wake up time:" />
+      <Label layoutX="64.0" layoutY="264.0" text="%wakeUpTime" />
       <TextField fx:id="wakeUpTimeTextField" layoutX="165.0" layoutY="259.0" prefHeight="27.0" prefWidth="70.0" text="06:30" />
-      <ToggleButton fx:id="startStopButton" layoutX="248.0" layoutY="259.0" mnemonicParsing="false" onAction="#startStopButtonClicked" text="On/Off" />
+      <ToggleButton fx:id="startStopButton" layoutX="248.0" layoutY="259.0" mnemonicParsing="false" onAction="#startStopButtonClicked" text="%onOff" />
    </children>
 </Pane>

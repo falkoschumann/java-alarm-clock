@@ -22,12 +22,9 @@ public class ViewController {
 
     public static <T extends ViewController> T load(Class<T> controllerClass) {
         try {
-            String viewFile = viewFile(controllerClass);
-            URL viewLocation = controllerClass.getResource(viewFile);
-            if (viewLocation == null) {
-                throw new IllegalStateException("The controller " + controllerClass + " can not found its view: " + viewFile);
-            }
-            FXMLLoader loader = new FXMLLoader(viewLocation);
+            URL viewLocation = getViewLocation(controllerClass);
+            ResourceBundle resources = getResourceBundle(controllerClass);
+            FXMLLoader loader = new FXMLLoader(viewLocation, resources);
             loader.load();
             return loader.getController();
         } catch (IOException e) {
@@ -35,12 +32,32 @@ public class ViewController {
         }
     }
 
-    private static String viewFile(Class<? extends ViewController> controllerClass) {
+    private static <T extends ViewController> URL getViewLocation(Class<T> controllerClass) {
+        String viewFile = "/" + getBaseName(controllerClass) + ".fxml";
+        URL viewLocation = controllerClass.getResource(viewFile);
+        if (viewLocation == null) {
+            throw new IllegalStateException("The controller " + controllerClass + " can not found its view: " + viewFile);
+        }
+        return viewLocation;
+    }
+
+    private static <T extends ViewController> ResourceBundle getResourceBundle(Class<T> controllerClass) {
+        try {
+            return ResourceBundle.getBundle(getClassName(controllerClass), controllerClass.getModule());
+        } catch (MissingResourceException e) {
+            return null;
+        }
+    }
+
+    private static String getBaseName(Class<? extends ViewController> controllerClass) {
+        return getClassName(controllerClass).replace(".", "/");
+    }
+
+    private static String getClassName(Class<? extends ViewController> controllerClass) {
         String name = controllerClass.getName();
-        if (name.endsWith("Controller"))
+        if (name.endsWith("Controller")) {
             name = name.substring(0, name.length() - "Controller".length());
-        name = name.replace(".", "/");
-        name = "/" + name + ".fxml";
+        }
         return name;
     }
 
