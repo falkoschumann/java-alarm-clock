@@ -18,10 +18,9 @@ public class WatchdogTests {
     public void nothingDiscovered() {
         var sut = new Watchdog();
         var remainingTime = new AtomicReference<Duration>();
-        sut.onRemainingTime().addHandler(remainingTime::set);
 
         sut.startWatchingFor(LocalDateTime.of(2015, 1, 1, 10, 0));
-        sut.check(LocalDateTime.of(2015, 1, 1, 9, 55, 35));
+        sut.check(LocalDateTime.of(2015, 1, 1, 9, 55, 35), remainingTime::set, () -> {});
 
         assertEquals(Duration.ofMinutes(4).plusSeconds(25), remainingTime.get(), "remainingTime");
     }
@@ -31,11 +30,9 @@ public class WatchdogTests {
         var sut = new Watchdog();
         var remainingTime = new AtomicReference<Duration>();
         var wakeUpTimeDiscovered = new AtomicReference<>(false);
-        sut.onRemainingTime().addHandler(remainingTime::set);
-        sut.onWakeUpTimeDiscovered().addHandler(() -> wakeUpTimeDiscovered.set(true));
 
         sut.startWatchingFor(LocalDateTime.of(2015, 1, 1, 10, 0));
-        sut.check(LocalDateTime.of(2015, 1, 1, 10, 0, 0));
+        sut.check(LocalDateTime.of(2015, 1, 1, 10, 0, 0), remainingTime::set, () -> wakeUpTimeDiscovered.set(true));
 
         assertEquals(Duration.ZERO, remainingTime.get(), "remaining time");
         assertTrue(wakeUpTimeDiscovered.get(), "wake up time discovered");
@@ -46,11 +43,9 @@ public class WatchdogTests {
         var sut = new Watchdog();
         var remainingTime = new AtomicReference<Duration>();
         var wakeUpTimeDiscovered = new AtomicReference<>(false);
-        sut.onRemainingTime().addHandler(remainingTime::set);
-        sut.onWakeUpTimeDiscovered().addHandler(() -> wakeUpTimeDiscovered.set(true));
 
         sut.startWatchingFor(LocalDateTime.of(2015, 1, 1, 10, 0));
-        sut.check(LocalDateTime.of(2015, 1, 1, 10, 1, 0));
+        sut.check(LocalDateTime.of(2015, 1, 1, 10, 1, 0), remainingTime::set, () -> wakeUpTimeDiscovered.set(true));
 
         assertEquals(Duration.ZERO, remainingTime.get(), "remaining time");
         assertTrue(wakeUpTimeDiscovered.get(), "wake up time discovered");
@@ -61,11 +56,9 @@ public class WatchdogTests {
         var sut = new Watchdog();
         var remainingTime = new AtomicReference<Duration>();
         var wakeUpTimeDiscovered = new AtomicReference<>(false);
-        sut.onRemainingTime().addHandler(remainingTime::set);
-        sut.onWakeUpTimeDiscovered().addHandler(() -> wakeUpTimeDiscovered.set(true));
 
         sut.startWatchingFor(LocalDateTime.of(2015, 1, 1, 10, 0));
-        sut.check(LocalDateTime.of(2015, 1, 1, 10, 0, 0));
+        sut.check(LocalDateTime.of(2015, 1, 1, 10, 0, 0), remainingTime::set, () -> wakeUpTimeDiscovered.set(true));
 
         remainingTime.set(null);
         wakeUpTimeDiscovered.set(false);
