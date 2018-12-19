@@ -11,12 +11,9 @@ import javafx.application.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 
-import java.time.*;
-import java.time.format.*;
+public class AlarmClockController extends ViewController {
 
-public class AlarmClockDialogController extends ViewController {
-
-    private final Event<LocalTime> onStartRequested = new Event<>();
+    private final Event<String> onStartRequested = new Event<>();
     private final Action onStopRequested = new Action();
 
     @FXML
@@ -31,20 +28,16 @@ public class AlarmClockDialogController extends ViewController {
     @FXML
     private ToggleButton startStopButton;
 
-    public static AlarmClockDialogController load() {
-        return load(AlarmClockDialogController.class);
+    public static AlarmClockController load() {
+        return load(AlarmClockController.class);
     }
 
-    public void updateCurrentTime(LocalDateTime time) {
-        String s = time.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM));
-        Platform.runLater(() -> currentTimeLabel.setText(s));
+    public void updateCurrentTime(String text) {
+        Platform.runLater(() -> currentTimeLabel.setText(text));
     }
 
-    public void updateRemainingTime(Duration time) {
-        LocalTime t = LocalTime.of(time.toHoursPart(), time.toMinutesPart(), time.toSecondsPart());
-        DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM);
-        String s = t.format(formatter);
-        Platform.runLater(() -> remainingTimeLabel.setText(s));
+    public void updateRemainingTime(String text) {
+        Platform.runLater(() -> remainingTimeLabel.setText(text));
     }
 
     public void wakeUpTimeReached() {
@@ -54,7 +47,7 @@ public class AlarmClockDialogController extends ViewController {
         });
     }
 
-    public Event<LocalTime> onStartRequested() {
+    public Event<String> onStartRequested() {
         return onStartRequested;
     }
 
@@ -67,10 +60,7 @@ public class AlarmClockDialogController extends ViewController {
         if (startStopButton.isSelected()) {
             remainingTimeLabel.setVisible(true);
             remainingTimeLabel.setText("");
-
-            DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT);
-            LocalTime time = LocalTime.parse(wakeUpTimeTextField.getText(), formatter);
-            onStartRequested.send(time);
+            onStartRequested.send(wakeUpTimeTextField.getText());
         } else {
             remainingTimeLabel.setVisible(false);
             onStopRequested.trigger();

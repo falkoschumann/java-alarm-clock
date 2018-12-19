@@ -11,7 +11,7 @@
   ~ Copyright (c) 2018 Falko Schumann
   -->
 
-<Pane fx:id="view" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.muspellheim.alarmclock.portal.AlarmClockDialogController">
+<Pane fx:id="view" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.muspellheim.alarmclock.portal.AlarmClockController">
    <children>
       <Label fx:id="currentTimeLabel" layoutX="123.0" layoutY="92.0" text="06:19:43">
          <font>

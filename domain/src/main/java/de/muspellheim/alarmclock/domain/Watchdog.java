@@ -5,14 +5,10 @@
 
 package de.muspellheim.alarmclock.domain;
 
-import de.muspellheim.util.*;
-
 import java.time.*;
+import java.util.function.*;
 
 public class Watchdog {
-
-    private final Event<Duration> onRemainingTime = new Event<>();
-    private final Action onWakeUpTimeDiscovered = new Action();
 
     private LocalDateTime wakeUpTime;
     private boolean watching;
@@ -26,7 +22,7 @@ public class Watchdog {
         watching = false;
     }
 
-    public void check(LocalDateTime currentTime) {
+    public void check(LocalDateTime currentTime, Consumer<Duration> onRemainingTime, Runnable onWakeUpTimeDiscovered) {
         if (!watching) {
             return;
         }
@@ -34,19 +30,11 @@ public class Watchdog {
         var remainingTime = Duration.between(currentTime, wakeUpTime);
         if (remainingTime.isNegative() || remainingTime.isZero()) {
             watching = false;
-            onRemainingTime.send(Duration.ZERO);
-            onWakeUpTimeDiscovered.trigger();
+            onRemainingTime.accept(Duration.ZERO);
+            onWakeUpTimeDiscovered.run();
         } else {
-            onRemainingTime.send(remainingTime);
+            onRemainingTime.accept(remainingTime);
         }
-    }
-
-    public Event<Duration> onRemainingTime() {
-        return onRemainingTime;
-    }
-
-    public Action onWakeUpTimeDiscovered() {
-        return onWakeUpTimeDiscovered;
     }
 
 }
