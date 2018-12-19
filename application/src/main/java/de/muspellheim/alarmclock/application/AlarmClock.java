@@ -24,6 +24,8 @@ public class AlarmClock extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        // TODO Extract head and body
+
         Watchdog watchdog = new Watchdog();
         Clock clock = new Clock();
         AlarmClockDialogController ui = AlarmClockDialogController.load();
