@@ -49,7 +49,7 @@ public class ViewController {
         }
 
         private static <T extends ViewController> URL getViewLocation(Class<T> controllerClass) {
-            String viewFile = "/" + getBaseName(controllerClass) + ".fxml";
+            String viewFile = "/" + getClassName(controllerClass).replace(".", "/") + ".fxml";
             URL viewLocation = controllerClass.getResource(viewFile);
             if (viewLocation == null) {
                 throw new IllegalStateException("The controller " + controllerClass + " can not found its view: " + viewFile);
@@ -63,11 +63,6 @@ public class ViewController {
             } catch (MissingResourceException e) {
                 return null;
             }
-        }
-
-        private static String getBaseName(Class<? extends ViewController> controllerClass) {
-            return getClassName(controllerClass)
-                    .replace(".", "/");
         }
 
         private static String getClassName(Class<? extends ViewController> controllerClass) {
