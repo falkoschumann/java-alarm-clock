@@ -30,8 +30,13 @@ public class AlarmClockController extends ViewController {
     private ToggleButton startStopButton;
 
     public static AlarmClockController load(Body body) {
-        // TODO add parameter body
-        return load(AlarmClockController.class);
+        AlarmClockController controller = load(AlarmClockController.class);
+        controller.onStartRequested().addHandler(body::start);
+        controller.onStopRequested().addHandler(body::stop);
+        body.onCurrentTime().addHandler(controller::updateCurrentTime);
+        body.onRemainingTime().addHandler(controller::updateRemainingTime);
+        body.onWakeUpTimeReached().addHandler(controller::wakeUpTimeReached);
+        return controller;
     }
 
     public void updateCurrentTime(String text) {

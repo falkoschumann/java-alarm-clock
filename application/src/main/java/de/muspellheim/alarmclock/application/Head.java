@@ -31,11 +31,6 @@ class Head {
 
     private void bind() {
         clock.onCurrentTime().addHandler(body::currentTimeUpdated);
-        alarmClockController.onStartRequested().addHandler(body::start);
-        alarmClockController.onStopRequested().addHandler(body::stop);
-        body.onCurrentTime().addHandler(alarmClockController::updateCurrentTime);
-        body.onRemainingTime().addHandler(alarmClockController::updateRemainingTime);
-        body.onWakeUpTimeReached().addHandler(alarmClockController::wakeUpTimeReached);
     }
 
     void run() {
