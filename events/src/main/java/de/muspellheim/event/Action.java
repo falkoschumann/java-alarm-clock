@@ -3,7 +3,7 @@
  * Copyright (c) 2018 Falko Schumann
  */
 
-package de.muspellheim.util;
+package de.muspellheim.event;
 
 import java.util.*;
 import java.util.concurrent.*;

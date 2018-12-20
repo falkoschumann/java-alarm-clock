@@ -1,5 +1,6 @@
 module de.muspellheim.alarmclock.domain {
-    requires de.muspellheim.base;
+    requires transitive de.muspellheim.events;
+    requires transitive de.muspellheim.alarmclock.providers.api;
 
     exports de.muspellheim.alarmclock.domain;
 }

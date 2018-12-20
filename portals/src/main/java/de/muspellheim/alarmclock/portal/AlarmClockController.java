@@ -5,8 +5,9 @@
 
 package de.muspellheim.alarmclock.portal;
 
-import de.muspellheim.fxml.*;
-import de.muspellheim.util.*;
+import de.muspellheim.alarmclock.domain.*;
+import de.muspellheim.event.*;
+import de.muspellheim.viewcontroller.*;
 import javafx.application.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
@@ -28,7 +29,8 @@ public class AlarmClockController extends ViewController {
     @FXML
     private ToggleButton startStopButton;
 
-    public static AlarmClockController load() {
+    public static AlarmClockController load(Body body) {
+        // TODO add parameter body
         return load(AlarmClockController.class);
     }
 

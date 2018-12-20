@@ -3,11 +3,10 @@
  * Copyright (c) 2018 Falko Schumann
  */
 
-package de.muspellheim.alarmclock.application;
+package de.muspellheim.alarmclock.domain;
 
-import de.muspellheim.alarmclock.domain.*;
 import de.muspellheim.alarmclock.provider.*;
-import de.muspellheim.util.*;
+import de.muspellheim.event.*;
 
 import java.time.*;
 import java.time.format.*;
@@ -15,9 +14,9 @@ import java.time.format.*;
 /**
  * The body integrates all features, but without user interaction.
  */
-class Body {
+public class Body {
 
-    // TODO Cucumber tests
+    // TODO Cucumber tests for domain design, see readme file
 
     private final Event<String> onCurrentTime = new Event<>();
     private final Event<String> onRemainingTime = new Event<>();
@@ -26,23 +25,23 @@ class Body {
     private final AlarmBell alarmBell;
     private final Watchdog watchdog;
 
-    Body(AlarmBell alarmBell) {
+    public Body(AlarmBell alarmBell) {
         this.alarmBell = alarmBell;
         watchdog = new Watchdog();
     }
 
-    void start(String wakeUpTime) {
+    public void start(String wakeUpTime) {
         var formatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT);
         var time = LocalTime.parse(wakeUpTime, formatter);
         var dateTime = LocalDateTime.of(LocalDate.now(), time);
         watchdog.startWatchingFor(dateTime);
     }
 
-    void stop() {
+    public void stop() {
         watchdog.stopWatching();
     }
 
-    void currentTimeUpdated(LocalDateTime currentTime) {
+    public void currentTimeUpdated(LocalDateTime currentTime) {
         watchdog.check(currentTime, this::remainingTimeUpdated, this::wakeUpTimeReached);
 
         var formatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM);
@@ -61,15 +60,15 @@ class Body {
         alarmBell.ring();
     }
 
-    Event<String> onCurrentTime() {
+    public Event<String> onCurrentTime() {
         return onCurrentTime;
     }
 
-    Event<String> onRemainingTime() {
+    public Event<String> onRemainingTime() {
         return onRemainingTime;
     }
 
-    Action onWakeUpTimeReached() {
+    public Action onWakeUpTimeReached() {
         return onWakeUpTimeReached;
     }
 

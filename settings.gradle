@@ -5,8 +5,9 @@
 
 rootProject.name = 'alarm-clock'
 include 'application'
-include 'base'
 include 'domain'
+include 'events'
 include 'portals'
 include 'providers-api'
 include 'providers'
+include 'view-controller'

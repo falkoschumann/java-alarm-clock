@@ -5,6 +5,7 @@
 
 package de.muspellheim.alarmclock.application;
 
+import de.muspellheim.alarmclock.domain.*;
 import de.muspellheim.alarmclock.provider.*;
 import javafx.application.*;
 import javafx.stage.*;

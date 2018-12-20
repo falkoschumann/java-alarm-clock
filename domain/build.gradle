@@ -6,5 +6,6 @@
 apply plugin: 'java-library'
 
 dependencies {
-    implementation project(':base')
+    api project(':events')
+    api project(':providers-api')
 }

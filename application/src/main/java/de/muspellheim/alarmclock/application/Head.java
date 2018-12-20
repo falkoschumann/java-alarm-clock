@@ -5,6 +5,7 @@
 
 package de.muspellheim.alarmclock.application;
 
+import de.muspellheim.alarmclock.domain.*;
 import de.muspellheim.alarmclock.portal.*;
 import javafx.scene.*;
 import javafx.stage.*;
@@ -22,7 +23,7 @@ class Head {
     Head(Body body, Stage primaryStage) {
         this.body = body;
         this.primaryStage = primaryStage;
-        alarmClockController = AlarmClockController.load();
+        alarmClockController = AlarmClockController.load(body);
         clock = new Clock();
 
         bind();

@@ -5,7 +5,7 @@
 
 package de.muspellheim.alarmclock.portal;
 
-import de.muspellheim.util.*;
+import de.muspellheim.event.*;
 
 import java.time.*;
 import java.util.*;

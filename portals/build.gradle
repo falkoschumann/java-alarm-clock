@@ -14,5 +14,6 @@ javafx {
 }
 
 dependencies {
-    implementation project(':base')
+    api project(':domain')
+    api project(':view-controller')
 }

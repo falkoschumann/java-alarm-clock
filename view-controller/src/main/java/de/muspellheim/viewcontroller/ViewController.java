@@ -3,7 +3,7 @@
  * Copyright (c) 2018 Falko Schumann
  */
 
-package de.muspellheim.fxml;
+package de.muspellheim.viewcontroller;
 
 import javafx.fxml.*;
 import javafx.scene.*;

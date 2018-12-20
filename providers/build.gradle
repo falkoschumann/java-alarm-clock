@@ -11,5 +11,5 @@ javafx {
 }
 
 dependencies {
-    implementation project(':providers-api')
+    api project(':providers-api')
 }

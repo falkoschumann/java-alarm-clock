@@ -16,10 +16,7 @@ javafx {
 }
 
 dependencies {
-    implementation project(':base')
-    implementation project(':domain')
     implementation project(':portals')
-    implementation project(':providers-api')
     runtimeOnly project(':providers')
 }
 
