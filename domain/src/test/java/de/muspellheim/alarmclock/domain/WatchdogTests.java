@@ -20,7 +20,8 @@ public class WatchdogTests {
         var remainingTime = new AtomicReference<Duration>();
 
         sut.startWatchingFor(LocalDateTime.of(2015, 1, 1, 10, 0));
-        sut.check(LocalDateTime.of(2015, 1, 1, 9, 55, 35), remainingTime::set, () -> {});
+        sut.check(LocalDateTime.of(2015, 1, 1, 9, 55, 35), remainingTime::set, () -> {
+        });
 
         assertEquals(Duration.ofMinutes(4).plusSeconds(25), remainingTime.get(), "remainingTime");
     }

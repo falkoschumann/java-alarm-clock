@@ -29,13 +29,13 @@ public class AlarmClockController extends ViewController {
     @FXML
     private ToggleButton startStopButton;
 
-    public static AlarmClockController load(Body body) {
+    public static AlarmClockController load(AlarmClockModel model) {
         AlarmClockController controller = load(AlarmClockController.class);
-        controller.onStartRequested().addHandler(body::start);
-        controller.onStopRequested().addHandler(body::stop);
-        body.onCurrentTime().addHandler(controller::updateCurrentTime);
-        body.onRemainingTime().addHandler(controller::updateRemainingTime);
-        body.onWakeUpTimeReached().addHandler(controller::wakeUpTimeReached);
+        controller.onStartRequested().addHandler(model::start);
+        controller.onStopRequested().addHandler(model::stop);
+        model.onCurrentTime().addHandler(controller::updateCurrentTime);
+        model.onRemainingTime().addHandler(controller::updateRemainingTime);
+        model.onWakeUpTimeReached().addHandler(controller::wakeUpTimeReached);
         return controller;
     }
 

@@ -15,21 +15,14 @@ import javafx.stage.*;
  */
 class Head {
 
-    private final Body body;
     private final Stage primaryStage;
     private final AlarmClockController alarmClockController;
-    private final Clock clock;
 
     Head(Body body, Stage primaryStage) {
-        this.body = body;
         this.primaryStage = primaryStage;
-        alarmClockController = AlarmClockController.load(body);
-        clock = new Clock();
+        alarmClockController = AlarmClockController.load(body.getAlarmClockModel());
+        Clock clock = new Clock();
 
-        bind();
-    }
-
-    private void bind() {
         clock.onCurrentTime().addHandler(body::currentTimeUpdated);
     }
 
