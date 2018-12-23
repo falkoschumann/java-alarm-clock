@@ -14,8 +14,6 @@ import java.time.*;
  */
 public class Body {
 
-    // TODO Cucumber tests for domain design, see readme file
-
     private final AlarmBell alarmBell;
     private final Watchdog watchdog;
     private final AlarmClockModel alarmClockModel;

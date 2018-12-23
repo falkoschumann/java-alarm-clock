@@ -13,6 +13,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SystemUnderTest {
 
+    // TODO Check names in AlarmClockController and AlarmClockModel
+    // TODO Replace presentation model with port and adapter?
+
     private final Body body;
     private final AlarmBellMock alarmBell;
 
