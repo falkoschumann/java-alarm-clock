@@ -12,10 +12,13 @@ import javafx.application.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 
+/**
+ * The controller interacts with the user and use {@link Body} as presentation model.
+ */
 public class AlarmClockController extends ViewController {
 
-    private final Event<String> onStartRequested = new Event<>();
-    private final Action onStopRequested = new Action();
+    private final Event<String> setAlarmClockFor = new Event<>();
+    private final Action turnOffAlarmClock = new Action();
 
     @FXML
     private Label currentTimeLabel;
@@ -29,37 +32,32 @@ public class AlarmClockController extends ViewController {
     @FXML
     private ToggleButton startStopButton;
 
-    public static AlarmClockController load(AlarmClockModel model) {
+    public static AlarmClockController load(Body body) {
         AlarmClockController controller = load(AlarmClockController.class);
-        controller.onStartRequested().addHandler(model::start);
-        controller.onStopRequested().addHandler(model::stop);
-        model.onCurrentTime().addHandler(controller::updateCurrentTime);
-        model.onRemainingTime().addHandler(controller::updateRemainingTime);
-        model.onWakeUpTimeReached().addHandler(controller::wakeUpTimeReached);
+
+        controller.setAlarmClockFor.addHandler(body::setAlarmClockFor);
+        controller.turnOffAlarmClock.addHandler(body::turnOffAlarmClock);
+
+        body.onCurrentTimeUpdated().addHandler(controller::currentTimeUpdated);
+        body.onRemainingTimeUpdated().addHandler(controller::remainingTimeUpdated);
+        body.onWakeUpTimeReached().addHandler(controller::wakeUpTimeReached);
+
         return controller;
     }
 
-    public void updateCurrentTime(String text) {
+    private void currentTimeUpdated(String text) {
         Platform.runLater(() -> currentTimeLabel.setText(text));
     }
 
-    public void updateRemainingTime(String text) {
+    private void remainingTimeUpdated(String text) {
         Platform.runLater(() -> remainingTimeLabel.setText(text));
     }
 
-    public void wakeUpTimeReached() {
+    private void wakeUpTimeReached() {
         Platform.runLater(() -> {
             remainingTimeLabel.setVisible(false);
             startStopButton.setSelected(false);
         });
-    }
-
-    public Event<String> onStartRequested() {
-        return onStartRequested;
-    }
-
-    public Action onStopRequested() {
-        return onStopRequested;
     }
 
     @FXML
@@ -67,10 +65,10 @@ public class AlarmClockController extends ViewController {
         if (startStopButton.isSelected()) {
             remainingTimeLabel.setVisible(true);
             remainingTimeLabel.setText("");
-            onStartRequested.send(wakeUpTimeTextField.getText());
+            setAlarmClockFor.send(wakeUpTimeTextField.getText());
         } else {
             remainingTimeLabel.setVisible(false);
-            onStopRequested.trigger();
+            turnOffAlarmClock.trigger();
         }
     }
 

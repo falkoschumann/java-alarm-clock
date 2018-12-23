@@ -8,6 +8,9 @@ package de.muspellheim.event;
 import java.util.*;
 import java.util.concurrent.*;
 
+/**
+ * An action is an {@link Event} without message.
+ */
 public final class Action {
 
     private final List<Runnable> handlers = new CopyOnWriteArrayList<>();

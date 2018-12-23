@@ -11,10 +11,10 @@ import java.time.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Facade for the body and providers in user acceptance tests.
+ */
 class SystemUnderTest {
-
-    // TODO Check names in AlarmClockController and AlarmClockModel
-    // TODO Replace presentation model with port and adapter?
 
     private final Body body;
     private final AlarmBellMock alarmBell;
@@ -26,16 +26,16 @@ class SystemUnderTest {
         alarmBell = new AlarmBellMock();
         body = new Body(alarmBell);
 
-        body.getAlarmClockModel().onCurrentTime().addHandler(s -> actualCurrentTime = s);
-        body.getAlarmClockModel().onRemainingTime().addHandler(s -> actualRemainingTime = s);
+        body.onCurrentTimeUpdated().addHandler(s -> actualCurrentTime = s);
+        body.onRemainingTimeUpdated().addHandler(s -> actualRemainingTime = s);
     }
 
     void userSwitchesOnAlarm(String wakeUpTime) {
-        body.getAlarmClockModel().start(wakeUpTime);
+        body.setAlarmClockFor(wakeUpTime);
     }
 
     void userSwitchesOffAlarm() {
-        body.getAlarmClockModel().stop();
+        body.turnOffAlarmClock();
     }
 
     void systemClockTicks(String currentTime) {

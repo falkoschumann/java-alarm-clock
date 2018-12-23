@@ -10,6 +10,9 @@ import javafx.scene.media.*;
 
 import java.net.*;
 
+/**
+ * Java FX implementation of alarm bell.
+ */
 public class AlarmBellImpl implements AlarmBell {
 
     @Override

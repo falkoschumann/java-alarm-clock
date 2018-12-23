@@ -12,6 +12,9 @@ import javafx.stage.*;
 
 import java.util.*;
 
+/**
+ * The application integrates the {@link Head}, the {@link Body} and providers and run the app.
+ */
 public class AlarmClock extends Application {
 
     public static void main(String[] args) {

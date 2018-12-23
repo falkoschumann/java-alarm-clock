@@ -12,6 +12,9 @@ import java.util.concurrent.atomic.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Unit tests for watchdog.
+ */
 public class WatchdogTests {
 
     @Test

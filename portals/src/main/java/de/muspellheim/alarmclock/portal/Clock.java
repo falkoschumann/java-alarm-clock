@@ -11,6 +11,9 @@ import java.time.*;
 import java.util.*;
 import java.util.concurrent.*;
 
+/**
+ * The clock offers current time.
+ */
 public class Clock {
 
     private final Event<LocalDateTime> onCurrentTime = new Event<>();

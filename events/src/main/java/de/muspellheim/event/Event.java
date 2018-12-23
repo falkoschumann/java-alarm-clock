@@ -9,6 +9,9 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.*;
 
+/**
+ * An Event send messages.
+ */
 public final class Event<T> {
 
     private final List<Consumer<T>> handlers = new CopyOnWriteArrayList<>();

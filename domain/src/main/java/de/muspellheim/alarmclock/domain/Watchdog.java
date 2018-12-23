@@ -8,6 +8,9 @@ package de.muspellheim.alarmclock.domain;
 import java.time.*;
 import java.util.function.*;
 
+/**
+ * If active, the watchdog check if wake up time reached.
+ */
 public class Watchdog {
 
     private LocalDateTime wakeUpTime;

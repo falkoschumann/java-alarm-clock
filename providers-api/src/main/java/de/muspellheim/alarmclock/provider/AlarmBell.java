@@ -5,6 +5,9 @@
 
 package de.muspellheim.alarmclock.provider;
 
+/**
+ * Provides a alarm bell.
+ */
 public interface AlarmBell {
 
     void ring();

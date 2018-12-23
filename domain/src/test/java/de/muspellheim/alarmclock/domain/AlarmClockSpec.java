@@ -7,7 +7,9 @@ package de.muspellheim.alarmclock.domain;
 
 import org.junit.jupiter.api.*;
 
-
+/**
+ * User acceptance test for the app Alarm Clock.
+ */
 public class AlarmClockSpec {
 
     private SystemUnderTest sut;

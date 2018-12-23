@@ -12,6 +12,17 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
+/**
+ * Base class for FXML controllers.
+ * <p>
+ * Conventions:
+ * </p>
+ * <ul>
+ * <li>The root node of FXML must have the id <code>view</code>.</li>
+ * <li>The controller should have the suffix <code>Controller</code>l</li>
+ * <li>The view FXML file must have the same name as the controller class without the suffix <code>Controller</code>.</li>
+ * </ul>
+ */
 public class ViewController {
 
     @FXML

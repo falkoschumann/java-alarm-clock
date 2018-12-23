@@ -11,7 +11,7 @@ import javafx.scene.*;
 import javafx.stage.*;
 
 /**
- * The head integrates the {@link Body} with input from and output to the user.
+ * The head integrates the {@link Body} and portals.
  */
 class Head {
 
@@ -20,7 +20,7 @@ class Head {
 
     Head(Body body, Stage primaryStage) {
         this.primaryStage = primaryStage;
-        alarmClockController = AlarmClockController.load(body.getAlarmClockModel());
+        alarmClockController = AlarmClockController.load(body);
         Clock clock = new Clock();
 
         clock.onCurrentTime().addHandler(body::currentTimeUpdated);
