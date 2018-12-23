@@ -37,5 +37,9 @@ subprojects {
 
     test {
         useJUnitPlatform()
+        testLogging {
+            showStackTraces = false
+            exceptionFormat = 'full'
+        }
     }
 }

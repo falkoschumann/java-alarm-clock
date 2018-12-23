@@ -15,7 +15,7 @@ public class AlarmClockSpec {
     private SystemUnderTest sut;
 
     @BeforeEach
-    public void setUp() {
+    public void initSystemUnderTest() {
         sut = new SystemUnderTest();
     }
 
