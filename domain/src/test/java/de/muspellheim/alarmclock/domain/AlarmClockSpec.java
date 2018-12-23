@@ -7,12 +7,19 @@ package de.muspellheim.alarmclock.domain;
 
 import org.junit.jupiter.api.*;
 
+import java.util.*;
+
 /**
  * User acceptance test for the app Alarm Clock.
  */
 public class AlarmClockSpec {
 
     private SystemUnderTest sut;
+
+    @BeforeAll
+    public static void setLocale() {
+        Locale.setDefault(Locale.GERMANY);
+    }
 
     @BeforeEach
     public void initSystemUnderTest() {
