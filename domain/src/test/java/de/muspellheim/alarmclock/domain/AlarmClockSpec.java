@@ -14,6 +14,8 @@ import java.util.*;
  */
 public class AlarmClockSpec {
 
+    // TODO Add error handling: wake up time not parsable
+
     private SystemUnderTest sut;
 
     @BeforeAll
