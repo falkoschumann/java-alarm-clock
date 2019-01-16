@@ -6,27 +6,42 @@
 package de.muspellheim.alarmclock.application;
 
 import de.muspellheim.alarmclock.domain.*;
+import de.muspellheim.alarmclock.portal.*;
 import de.muspellheim.alarmclock.provider.*;
 import javafx.application.*;
+import javafx.scene.*;
 import javafx.stage.*;
 
 import java.util.*;
 
 /**
- * The application integrates the {@link Head}, the {@link Body} and providers and run the app.
+ * The application integrates the {@link Body}, portals and providers and run the app.
  */
 public class AlarmClock extends Application {
+
+    private AlarmClockController alarmClockController;
 
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void init() {
         var alarmBell = createAlarmBell();
         var body = new Body(alarmBell);
-        var head = new Head(body, primaryStage);
-        head.run();
+
+        alarmClockController = AlarmClockController.load(body);
+        Clock clock = new Clock();
+
+        clock.onCurrentTime().addHandler(body::currentTimeUpdated);
+
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("Alarm Clock");
+        primaryStage.setScene(new Scene(alarmClockController.getView()));
+        primaryStage.show();
     }
 
     private AlarmBell createAlarmBell() {
