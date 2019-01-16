@@ -34,7 +34,6 @@ public class AlarmClock extends Application {
         Clock clock = new Clock();
 
         clock.onCurrentTime().addHandler(body::currentTimeUpdated);
-
     }
 
     @Override
