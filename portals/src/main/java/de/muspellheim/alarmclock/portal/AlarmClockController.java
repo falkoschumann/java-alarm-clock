@@ -6,7 +6,6 @@
 package de.muspellheim.alarmclock.portal;
 
 import de.muspellheim.alarmclock.domain.*;
-import de.muspellheim.event.*;
 import de.muspellheim.viewcontroller.*;
 import javafx.application.*;
 import javafx.fxml.*;
@@ -16,9 +15,6 @@ import javafx.scene.control.*;
  * The controller interacts with the user and use {@link Body} as presentation model.
  */
 public class AlarmClockController extends ViewController {
-
-    private final Event<String> setAlarmClockFor = new Event<>();
-    private final Action turnOffAlarmClock = new Action();
 
     @FXML
     private Label currentTimeLabel;
@@ -32,11 +28,11 @@ public class AlarmClockController extends ViewController {
     @FXML
     private ToggleButton startStopButton;
 
-    public static AlarmClockController load(Body body) {
-        AlarmClockController controller = load(AlarmClockController.class);
+    private Body body;
 
-        controller.setAlarmClockFor.addHandler(body::setAlarmClockFor);
-        controller.turnOffAlarmClock.addHandler(body::turnOffAlarmClock);
+    public static AlarmClockController load(Body body) {
+        AlarmClockController controller = ViewControllerFactory.load(AlarmClockController.class);
+        controller.body = body;
 
         body.onCurrentTimeUpdated().addHandler(controller::currentTimeUpdated);
         body.onRemainingTimeUpdated().addHandler(controller::remainingTimeUpdated);
@@ -65,10 +61,10 @@ public class AlarmClockController extends ViewController {
         if (startStopButton.isSelected()) {
             remainingTimeLabel.setVisible(true);
             remainingTimeLabel.setText("");
-            setAlarmClockFor.send(wakeUpTimeTextField.getText());
+            body.setAlarmClockFor(wakeUpTimeTextField.getText());
         } else {
             remainingTimeLabel.setVisible(false);
-            turnOffAlarmClock.trigger();
+            body.turnOffAlarmClock();
         }
     }
 
