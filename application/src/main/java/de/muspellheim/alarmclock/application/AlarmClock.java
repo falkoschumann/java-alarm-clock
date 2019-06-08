@@ -15,7 +15,7 @@ import javafx.stage.*;
 import java.util.*;
 
 /**
- * The application integrates the {@link Body}, portals and providers and run the app.
+ * The application aka head integrates the {@link Body}, portals and providers and run the app.
  */
 public class AlarmClock extends Application {
 
@@ -32,14 +32,14 @@ public class AlarmClock extends Application {
 
         alarmClockController = AlarmClockController.load(body);
         Clock clock = new Clock();
-
         clock.onCurrentTime().addHandler(body::currentTimeUpdated);
     }
 
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Alarm Clock");
-        primaryStage.setScene(new Scene(alarmClockController.getView()));
+        Scene scene = new Scene(alarmClockController.getView());
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
